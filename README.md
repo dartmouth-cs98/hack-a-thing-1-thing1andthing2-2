@@ -1,5 +1,3 @@
-##A README
-
-Trypophobia is real
+*Benji Hannam and Brian Keare*
 
 
