@@ -1,3 +1,3 @@
 *Benji Hannam and Brian Keare*
 
-#React Native Test Project
+#React Test Project based off the tutorial from https://facebook.github.io/react/tutorial/tutorial.html
