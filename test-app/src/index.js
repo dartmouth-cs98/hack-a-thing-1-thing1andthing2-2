@@ -11,6 +11,7 @@ function Square(props) {
   );
 }
 
+
 class Board extends React.Component {
 
   renderSquare(i) {
@@ -44,6 +45,7 @@ class Board extends React.Component {
     );
   }
 }
+
 
 class Game extends React.Component {
   constructor(){
