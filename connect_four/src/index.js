@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -94,6 +93,7 @@ class Game extends React.Component {
       }],
       xIsNext: true,
       stepNumber: 0,
+      columns: Array(7).fill(0),
     };
   }
 
@@ -101,17 +101,35 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]){
+    const columns = this.state.columns.slice();
+
+    if (calculateWinner(squares)){
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      history: history.concat([{
-        squares: squares,
-      }]),
-      xIsNext: !this.state.xIsNext,
-      stepNumber: history.length,
-    });
+
+    //get the column that we clicked
+    var column = i % 7;
+    //get the index of the lowest empty square in that column
+    var square_index = column + columns[column]*7;
+
+    //Set the square to the correct persons move
+    squares[square_index] = this.state.xIsNext ? 'X' : 'O';
+
+    //if we are not overflowing over the top
+    if(columns[column] < 6){
+	    //update the column array to reflect this
+	    columns[column] += 1;
+
+
+	    this.setState({
+	      history: history.concat([{
+	        squares: squares,
+	      }]),
+	      xIsNext: !this.state.xIsNext,
+	      stepNumber: history.length,
+	      columns: columns,
+	    });    	
+    }
   }
 
 
