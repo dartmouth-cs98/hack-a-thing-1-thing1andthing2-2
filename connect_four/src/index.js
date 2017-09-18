@@ -93,7 +93,9 @@ class Game extends React.Component {
       }],
       xIsNext: true,
       stepNumber: 0,
-      columns: Array(7).fill(0),
+      columns: [{
+        colHeights: Array(42).fill(null),
+      }]
     };
   }
 
@@ -101,24 +103,27 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    const columns = this.state.columns.slice();
+
+    const columns = this.state.columns.slice(0, this.state.stepNumber + 1);
+    const currentCols = columns[columns.length - 1];
+    const colHeights = currentCols.colHeights.slice();
 
     if (calculateWinner(squares)){
       return;
     }
 
     //get the column that we clicked
-    var column = i % 7;
+    var col = i % 7;
     //get the index of the lowest empty square in that column
-    var square_index = column + columns[column]*7;
+    var square_index = col + colHeights[col]*7;
 
     //Set the square to the correct persons move
     squares[square_index] = this.state.xIsNext ? 'X' : 'O';
 
     //if we are not overflowing over the top
-    if(columns[column] < 6){
+    if(colHeights[col] < 6){
 	    //update the column array to reflect this
-	    columns[column] += 1;
+	    colHeights[col] += 1;
 
 
 	    this.setState({
@@ -127,8 +132,10 @@ class Game extends React.Component {
 	      }]),
 	      xIsNext: !this.state.xIsNext,
 	      stepNumber: history.length,
-	      columns: columns,
-	    });    	
+	      columns: columns.concat([{
+          colHeights: colHeights,
+        }]),
+	    });
     }
   }
 
@@ -161,13 +168,13 @@ class Game extends React.Component {
     if (winner){
       status = "Winner: " + winner;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O'); 
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
     return (
       <div className="game">
         <div className="game-board">
-          <Board 
+          <Board
             squares = {current.squares}
             onClick = {(i) => this.handleClick(i)}
           />
@@ -184,7 +191,7 @@ class Game extends React.Component {
 //calculate if we have a winner
 function calculateWinner(squares){
   for(let i = 0; i < squares.length; i++){
- 
+
   	if(i % 7 < 4 && squares[i]){
   		 // check for horizontal victory
   		if(squares[i] === squares[i+1] && squares[i] === squares[i+2] && squares[i] === squares[i+3]){
