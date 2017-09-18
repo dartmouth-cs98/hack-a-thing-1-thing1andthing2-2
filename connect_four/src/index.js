@@ -205,7 +205,7 @@ function calculateWinner(squares){
   	}
 
   	//check for left diagonal victory
-  	if(i % 7 > 3 && squares[i]){
+  	if(i % 7 > 2 && squares[i]){
   		if(squares[i] === squares[i+6] && squares[i] === squares[i+12] && squares[i] === squares[i+18]){
   			return squares[i];
   		}
