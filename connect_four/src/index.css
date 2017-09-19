@@ -13,6 +13,11 @@ a:hover {
   color: red;
 }
 
+p {
+  color: orange;
+  font: 26;
+}
+
 ol, ul {
   padding-left: 30px;
 }
@@ -73,7 +78,7 @@ ol, ul {
   display: flex;
   flex-direction: row;
 
-  margin: 15;
+  margin: 0;
   background: green;
   position: absolute;
   top: 50%;
@@ -85,4 +90,5 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+  margin-right: 20px;
 }
