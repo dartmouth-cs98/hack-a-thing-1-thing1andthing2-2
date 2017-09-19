@@ -136,7 +136,7 @@ class Game extends React.Component {
 	    });
     }
 
-    
+
     if ((winner =calculateWinner(squares)) != null){
 
       for (var i = 0; i < squares.length; i++) {
@@ -208,7 +208,7 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div><p>{status}</p></div>
           <ol>{moves}</ol>
         </div>
       </div>

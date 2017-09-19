@@ -13,6 +13,10 @@ a:hover {
   color: red;
 }
 
+p {
+  color: orange;
+}
+
 ol, ul {
   padding-left: 30px;
 }
