@@ -108,7 +108,34 @@ class Game extends React.Component {
     const currentCols = columns[columns.length - 1];
     const colHeights = currentCols.colHeights.slice();
 
-    if (calculateWinner(squares)){
+    var winner;
+
+    if ((winner =calculateWinner(squares)) != null){
+
+      for (var i = 0; i < squares.length; i++) {
+        squares[i] = null;
+      }
+
+      squares[21] = winner;
+      squares[23] = 'W';
+      squares[24] = 'I';
+      squares[25] = 'N';
+      squares[26] = 'S';
+      squares[27] = '!';
+
+
+      this.setState({
+	      history: history.concat([{
+	        squares: squares,
+	      }]),
+	      xIsNext: !this.state.xIsNext,
+	      stepNumber: history.length,
+	      columns: columns.concat([{
+          colHeights: colHeights,
+        }]),
+	    });
+
+
       return;
     }
 
