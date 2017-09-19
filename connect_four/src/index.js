@@ -110,6 +110,33 @@ class Game extends React.Component {
 
     var winner;
 
+    //get the column that we clicked
+    var col = i % 7;
+    //get the index of the lowest empty square in that column
+    var square_index = col + colHeights[col]*7;
+
+    //Set the square to the correct persons move
+    squares[square_index] = this.state.xIsNext ? 'X' : 'O';
+
+    //if we are not overflowing over the top
+    if(colHeights[col] < 6){
+	    //update the column array to reflect this
+	    colHeights[col] += 1;
+
+
+	    this.setState({
+	      history: history.concat([{
+	        squares: squares,
+	      }]),
+	      xIsNext: !this.state.xIsNext,
+	      stepNumber: history.length,
+	      columns: columns.concat([{
+          colHeights: colHeights,
+        }]),
+	    });
+    }
+
+    
     if ((winner =calculateWinner(squares)) != null){
 
       for (var i = 0; i < squares.length; i++) {
@@ -138,32 +165,6 @@ class Game extends React.Component {
 
       return;
     }
-
-    //get the column that we clicked
-    var col = i % 7;
-    //get the index of the lowest empty square in that column
-    var square_index = col + colHeights[col]*7;
-
-    //Set the square to the correct persons move
-    squares[square_index] = this.state.xIsNext ? 'X' : 'O';
-
-    //if we are not overflowing over the top
-    if(colHeights[col] < 6){
-	    //update the column array to reflect this
-	    colHeights[col] += 1;
-
-
-	    this.setState({
-	      history: history.concat([{
-	        squares: squares,
-	      }]),
-	      xIsNext: !this.state.xIsNext,
-	      stepNumber: history.length,
-	      columns: columns.concat([{
-          colHeights: colHeights,
-        }]),
-	    });
-    }
   }
 
 
@@ -183,7 +184,7 @@ class Game extends React.Component {
     const moves = history.map((step, move) => {
       const desc = move ?
         'Move #' + move :
-        '*Restart*     ';
+        'RESTART';
       return (
         <li key ={move}>
           <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
