@@ -10,4 +10,4 @@ We worked together pair programming style through the tutorial alternating betwe
 We learned the basics of using react to build a web-app, a language that neither of us had never touched. On top of this we began to get familiar with CSS.
 
 ## What did not work?
-We struggled with actually styling the connect four game to look more like an actual connect four game. We originally had planned to have coloured in squares as out piece but eventually settled for using "X" and "O" to represent the pieces.
+We struggled with actually styling the connect four game to look more like an actual connect four game. We originally had planned to have coloured in squares as our pieces but eventually settled for using "X" and "O" to represent the pieces instead.
